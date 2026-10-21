@@ -81,13 +81,15 @@ export default function App() {
         <SceneContent scene={scenes[0]} revealed={0} />
       </main>
       <footer className="journey-footer">
-        <div className="journey-navigation">
+        <span className="footer-star" data-motion="ornament" aria-hidden="true">✶</span>
+        <div className="journey-navigation" data-motion="soft">
           <span className="dedication">{storyConfig.dedication}</span>
           <button className="primary-button" type="button" disabled={transitioning} onClick={() => changeView('begin')}>
             <span>{scenes[0].continueLabel ?? storyConfig.labels.begin}</span><Arrow />
           </button>
         </div>
-        <div className="journey-meta">
+        <div className="journey-meta" data-motion="meta">
+          <span className="journey-meta-divider" aria-hidden="true" />
           <span className="chapter-progress" aria-label={`Chapter 1 of ${scenes.length}`}><span className="progress-current">01</span><span className="progress-separator">/</span>{pad(scenes.length)}</span>
           <span className="journey-caption">A little courage. Then let the story unfold.</span>
           {motionControl}

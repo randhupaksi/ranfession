@@ -25,7 +25,9 @@ Tidak ada snap-scroll atau scroll hijacking. Ukuran teks/zoom boleh membuat doku
 
 ## Motion
 
-`useStoryMotion` menggunakan GSAP dan ScrollTrigger untuk entrance hero, judul dan blok cerita, transisi view, dan Final Click. Kata pada judul bergerak dalam satu animasi per judul, sedangkan isi cerita dianimasikan per blok untuk mengurangi pekerjaan browser saat scroll. Dekorasi dan tekstur latar tetap statis. Semua konten adalah DOM text; animasi tidak membuka gate state selain Final Click.
+`useStoryMotion` memakai atribut `data-motion` untuk mendaftarkan kelompok UI yang memang perlu bergerak: label dan garis eyebrow, sapaan, kata pada judul, kartu/fragmen, teks isi, nomor dan indeks bab, ornamen section, tombol, scroll cue, serta divider. Pseudo-element yang membawa aksen visual utama (tanda kutip, frame confession, label hero, bintang footer, dan garis section) telah menjadi elemen DOM agar GSAP dapat menargetkannya. Kata pada judul di-stagger dalam satu timeline; isi dan ornamen lain dianimasikan per kelompok untuk membatasi jumlah trigger.
+
+Entrance hero diputar saat opening dimuat; header, rail, dan benang vertikal membaca masuk sekali ketika story view dimulai lalu tetap stabil selama scroll. Setiap kelompok di section memakai ScrollTrigger yang sama-sama dapat dibalik: saat pembaca melewati batas pemicu ke atas, elemen meredup/bergerak keluar; saat scroll turun lagi, entrance diputar ulang. Tekstur atmosfer dan aksen chrome global tidak membuat trigger per section. Semua copy tetap tersedia sebagai DOM text; animasi tidak membuka gate selain aksi Final Click.
 
 - Preferensi sistem `prefers-reduced-motion` menghapus entrance yang tidak perlu.
 - Jika sistem tidak meminta reduced motion, tersedia kontrol **Reduce motion / Enable motion**.

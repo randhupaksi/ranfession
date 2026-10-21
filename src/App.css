@@ -47,7 +47,7 @@
 .layout-editorial { padding-left: 10%; }.layout-editorial .scene-heading { font-size: clamp(52px, 6.5vw, 94px); }
 .layout-fragments { display: grid; grid-template-columns: 1.05fr 1fr; column-gap: 8%; align-items: start; }
 .layout-fragments .scene-eyebrow { grid-column: 1 / -1; }.layout-fragments .scene-heading { font-size: clamp(48px, 5.2vw, 76px); }.layout-fragments .fragments { margin-top: 6px; max-width: none; min-height: 260px; }.layout-fragments .fragment-slot { min-height: 75px; border-bottom: 1px solid var(--line); padding: 0 0 20px; }.layout-fragments .fragment-slot + .fragment-slot { margin-top: 23px; }.layout-fragments .fragment p { font-size: 16px; }
-.layout-quotation { padding-left: 41%; }.layout-quotation::before { content: '“'; position: absolute; left: 12%; top: 35px; color: var(--champagne); opacity: .32; font-family: var(--serif); font-size: 240px; line-height: 1; }.layout-quotation .scene-heading { font-size: clamp(48px, 5.2vw, 76px); }.layout-quotation .fragments { border-left: 1px solid var(--line); padding-left: 24px; }.layout-quotation .reveal-hint { left: 24px; }
+.layout-quotation { padding-left: 41%; }.layout-quotation .scene-quote-mark { position: absolute; left: 12%; top: 35px; color: var(--champagne); opacity: .32; font-family: var(--serif); font-size: 240px; line-height: 1; pointer-events: none; }.layout-quotation .scene-heading { font-size: clamp(48px, 5.2vw, 76px); }.layout-quotation .fragments { border-left: 1px solid var(--line); padding-left: 24px; }.layout-quotation .reveal-hint { left: 24px; }
 .layout-realization, .layout-quiet, .layout-confession, .layout-closing { text-align: center; margin-inline: auto; }
 .layout-realization .scene-eyebrow, .layout-quiet .scene-eyebrow, .layout-confession .scene-eyebrow, .layout-closing .scene-eyebrow { justify-content: center; }
 .layout-realization .eyebrow-rule, .layout-quiet .eyebrow-rule, .layout-confession .eyebrow-rule, .layout-closing .eyebrow-rule { width: 18px; }
@@ -64,13 +64,14 @@
 .primary-button svg { transition: transform .3s; }.primary-button:hover { background: var(--champagne); color: var(--charcoal); border-color: var(--champagne); }.primary-button:hover svg { transform: translateX(4px); }.primary-button:disabled { opacity: .6; }.final-button { border-color: var(--champagne); background: rgba(189,169,144,.07); }
 .back-button { display: inline-flex; align-items: center; gap: 14px; min-height: 48px; padding: 10px 10px 10px 0; border: 0; background: none; color: var(--muted); font-size: 12px; }.back-button:hover { color: var(--ivory); }
 .dedication { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.5; }
-.journey-meta { border-top: 1px solid var(--line); padding-top: 21px; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; }
+.journey-meta { position: relative; border-top: 0; padding-top: 21px; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; }
+.journey-meta-divider { position: absolute; top: 0; right: 0; left: 0; border-top: 1px dashed var(--line); transform-origin: left center; }
 .chapter-progress { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 10px; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
 .progress-current { color: var(--champagne); }.progress-separator { color: var(--faint); }.progress-track { margin-left: 13px; width: 100px; height: 1px; background: var(--line); }.progress-track span { display: block; background: var(--champagne); height: 1px; transition: width .6s ease; }
 .journey-caption { font-size: 10px; color: var(--muted); letter-spacing: .04em; }.motion-button { color: var(--muted); border: 0; background: none; font-size: 10px; min-height: 28px; padding: 2px 0 2px 10px; }.motion-button:hover { color: var(--ivory); }
 @media (min-width: 1600px) { .chapter { min-height: 560px; } }
 @media (max-width: 900px) {
-  .layout-invitation, .layout-editorial { padding-left: 0; }.layout-fragments { column-gap: 6%; grid-template-columns: 1fr 1fr; }.layout-fragments .fragment p { font-size: 14px; }.layout-quotation { padding-left: 27%; }.layout-quotation::before { left: 0; font-size: 180px; }
+  .layout-invitation, .layout-editorial { padding-left: 0; }.layout-fragments { column-gap: 6%; grid-template-columns: 1fr 1fr; }.layout-fragments .fragment p { font-size: 14px; }.layout-quotation { padding-left: 27%; }.layout-quotation .scene-quote-mark { left: 0; font-size: 180px; }
   .orbit { width: 900px; height: 900px; margin: -450px 0 0 -450px; }.journey-caption { display: none; }
 }
 @media (max-width: 600px) {
@@ -79,7 +80,7 @@
   .scene-heading { font-size: clamp(40px, 10.8vw, 64px); line-height: 1.08; letter-spacing: -.05em; }.layout-invitation .scene-heading { font-size: clamp(48px, 12.7vw, 76px); line-height: 1.03; }.scene-body, .fragment p { font-size: 14px; line-height: 1.85; }.opening-body { margin-top: 27px; max-width: 310px; }
   .layout-editorial .scene-heading { font-size: clamp(42px, 11.4vw, 68px); }.fragments { margin-top: 27px; min-height: 170px; }.fragment-slot { min-height: 74px; }.reveal-hint { font-size: 16px; }
   .layout-fragments { display: block; }.layout-fragments .scene-heading { font-size: clamp(42px, 11.4vw, 68px); }.layout-fragments .fragments { margin-top: 30px; min-height: 255px; }.layout-fragments .fragment-slot { min-height: 71px; padding-bottom: 14px; }.layout-fragments .fragment-slot + .fragment-slot { margin-top: 17px; }.layout-fragments .fragment p { font-size: 14px; }
-  .layout-quotation { padding-left: 25px; }.layout-quotation::before { font-size: 85px; top: -6px; left: -14px; opacity: .2; }.layout-quotation .scene-heading { font-size: clamp(42px, 11vw, 66px); }.layout-quotation .fragments { padding-left: 17px; }.layout-quotation .reveal-hint { left: 17px; }
+  .layout-quotation { padding-left: 25px; }.layout-quotation .scene-quote-mark { font-size: 85px; top: -6px; left: -14px; opacity: .2; }.layout-quotation .scene-heading { font-size: clamp(42px, 11vw, 66px); }.layout-quotation .fragments { padding-left: 17px; }.layout-quotation .reveal-hint { left: 17px; }
   .layout-realization .scene-heading, .layout-quiet .scene-heading, .layout-confession .scene-heading { font-size: clamp(40px, 10.4vw, 62px); }.layout-realization .scene-eyebrow, .layout-quiet .scene-eyebrow, .layout-confession .scene-eyebrow, .layout-closing .scene-eyebrow { font-size: 8px; letter-spacing: .16em; }
   .layout-confession.is-confessed .scene-heading { font-size: clamp(66px, 18vw, 108px); }.confession-body { margin-top: 27px; }.layout-closing .scene-heading { font-size: clamp(34px, 9vw, 54px); }.signature { font-size: 15px; }.closing-body .scene-body { font-size: 13px; }
   .orbit { width: 760px; height: 760px; margin: -380px 0 0 -380px; opacity: .68; }.orbit-inner { opacity: .5; }
@@ -116,11 +117,10 @@
 .heading-visual { display: contents; }
 .scene-heading .motion-copy { display: inline; }
 .hero-stage .scene-content { isolation: isolate; }
-.hero-stage .scene-content::before { content: 'a private little universe'; position: absolute; right: 1%; top: 0; color: var(--rose); font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .04em; transform: rotate(6deg); opacity: .65; }
+.hero-stage .scene-aside-label { position: absolute; right: 2%; top: 2%; color: var(--rose); font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .04em; transform: rotate(6deg); opacity: .65; pointer-events: none; }
 .hero-stage .opening-body { max-width: 360px; }
 .hero-stage .journey-footer { position: relative; }
-.hero-stage .journey-footer::before { content: '✶'; position: absolute; left: 48%; top: -15px; color: var(--rose); font-size: 12px; opacity: .65; }
-.journey-meta { border-top-style: dashed; }
+.footer-star { position: absolute; left: 48%; top: -15px; color: var(--rose); font-size: 12px; opacity: .65; pointer-events: none; }
 .primary-button { border-radius: 48% 52% 45% 55% / 54% 45% 55% 46%; box-shadow: 0 0 0 1px rgba(216,166,164,.08), 0 10px 35px rgba(0,0,0,.14); }
 .final-button { border-radius: 43% 57% 50% 50% / 52% 46% 54% 48%; box-shadow: 0 0 0 5px rgba(189,169,144,.035), 0 0 35px rgba(216,166,164,.11); }
 .primary-button:hover { box-shadow: 0 0 0 5px rgba(216,166,164,.12), 0 12px 38px rgba(0,0,0,.24); }
@@ -128,7 +128,7 @@
 @media (max-width: 700px) {
   .site-header::before { display: none; }
   .sound-control { border-left: 0; padding-left: 0; }
-  .hero-stage .scene-content::before { right: 2%; top: -12px; font-size: 10px; }
+  .hero-stage .scene-aside-label { right: 2%; top: -12px; font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

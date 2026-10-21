@@ -12,7 +12,7 @@ function getKind(scene: Scene) {
 
 export function SectionDecor({ scene, index, stage = 'story' }: Props) {
   const kind = getKind(scene)
-  return <div className={`section-decor section-decor-${kind} ${stage === 'hero' ? 'is-hero' : ''}`} aria-hidden="true">
+  return <div className={`section-decor section-decor-${kind} ${stage === 'hero' ? 'is-hero' : ''}`} data-motion="decor" aria-hidden="true">
     <span className="decor-orbit decor-orbit-one" />
     <span className="decor-orbit decor-orbit-two" />
     <svg className="decor-glyph" viewBox="0 0 200 200" fill="none">
