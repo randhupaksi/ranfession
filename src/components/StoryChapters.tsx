@@ -26,7 +26,7 @@ export function StoryChapters({ scenes, state, onReveal, onRestart, transitionin
       return <section key={scene.id} id={`chapter-${scene.id}`} className={`story-section section-${layout}`}
         data-story-section data-chapter={index + 1} data-label={scene.label} aria-labelledby={`heading-${scene.id}`}>
         <SectionDecor scene={scene} index={index + 1} />
-        <span className="chapter-numeral" data-motion="accent" aria-hidden="true">{String(pageNumber).padStart(2, '0')}</span>
+        <span className="chapter-numeral" data-motion="parallax" aria-hidden="true">{String(pageNumber).padStart(2, '0')}</span>
         <div className="section-inner">
           <div className="chapter-index" data-motion="index" aria-hidden="true">
             <span className="chapter-index-label">Ranfession · page</span>

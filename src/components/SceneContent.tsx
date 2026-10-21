@@ -47,7 +47,7 @@ export function SceneContent({ scene, revealed, headingRef, headingTag: Heading 
     {scene.type === 'closing' && <div className="closing-body" data-motion="lift">
       <p className="scene-body">{scene.body}</p>
       <p className="signature">{storyConfig.senderName.trim() ? `With warmth, ${storyConfig.senderName.trim()}` : 'With a little more courage than before.'}</p>
-      <span className="closing-star" aria-hidden="true">✧</span>
+      <span className="closing-star" data-motion="ornament" aria-hidden="true">✧</span>
     </div>}
     {children}
   </div>
