@@ -89,6 +89,7 @@
 @media (max-height: 620px) and (min-width: 601px) { .chapter { min-height: 350px; }.site-header { padding-top: 16px; min-height: 65px; }.scene-heading, .layout-invitation .scene-heading { font-size: 60px; }.journey-navigation { padding-bottom: 18px; } }
 @media (prefers-reduced-motion: reduce) { .grain { display: none; } }
 .confession-word { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; }
+.confession-word:not(:last-child) { margin-inline-end: .2em; }
 .greeting, .signature, .dedication { overflow-wrap: anywhere; }
 .primary-button > span { overflow-wrap: anywhere; min-width: 0; text-align: left; }
 .motion-button { min-height: 44px; }
@@ -111,9 +112,10 @@
 .wordmark-button::after { content: '✦'; position: absolute; left: -17px; top: -3px; color: var(--rose); font-size: 9px; opacity: .72; }
 .wordmark { letter-spacing: -.06em; }
 .sound-control { border-left: 1px solid rgba(189,169,144,.16); padding-left: 16px; }
-.scene-eyebrow .motion-copy { display: inline-flex; flex-wrap: wrap; gap: .28em; }
+.scene-eyebrow .motion-copy { display: inline-flex; flex-wrap: wrap; gap: 0; }
 .motion-lines, .motion-line { display: block; }
-.motion-word { display: inline-block; will-change: transform, opacity, filter; transform-origin: 50% 100%; }
+.motion-word { display: inline-block; max-width: 100%; overflow-wrap: anywhere; will-change: transform, opacity, filter; transform-origin: 50% 100%; }
+.motion-word:not(:last-child) { margin-inline-end: .22em; }
 .heading-visual { display: contents; }
 .scene-heading .motion-copy { display: inline; }
 .hero-stage .scene-content { isolation: isolate; }
