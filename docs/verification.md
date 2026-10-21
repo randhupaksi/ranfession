@@ -3,14 +3,22 @@
 ## Perintah repository
 
 ```powershell
+npm ci
+npm run e2e:install
 npm run build
 npm run lint
 npm test
+npm run test:e2e
+npm run verify
 ```
 
 - `npm run build` menjalankan `tsc -b` sebelum Vite membuat folder `dist/`.
 - `npm run lint` menjalankan Oxlint.
 - `npm test` menjalankan `tests/journey.test.mjs` memakai Node test runner, Vite SSR loader, dan React server rendering.
+- `npm run e2e:install` mengunduh Chromium untuk komputer lokal. Di Windows, E2E memakai Microsoft Edge jika tersedia; GitHub Actions memakai Chromium dengan dependensi Linux.
+- `npm run test:e2e` membangun situs, lalu menjalankan `e2e/confession.spec.ts` terhadap Vite preview lokal.
+- `npm run verify` menjalankan lint, unit test, build, lalu E2E. Browser harus sudah dipasang lebih dulu.
+- `.github/workflows/ci.yml` menjalankan lint, unit test, build, dan E2E pada pull request/push `main`; trace/screenshot kegagalan diunggah sebagai artifact.
 
 Jalankan pemeriksaan yang relevan dengan perubahan, lalu laporkan command dan hasil sebenarnya. Build/lint/test tidak membuktikan kualitas visual, aksesibilitas dengan teknologi bantu, atau kualitas suara.
 
@@ -32,6 +40,17 @@ Tes sekarang mencakup:
 - initial app SSR hanya me-render hero.
 
 Suite ini tidak mengotomasi gerakan GSAP di browser atau menguji audio perangkat nyata.
+
+### Cakupan E2E Playwright
+
+- Initial hero dan audio dalam keadaan mati.
+- Begin membuka chapter cerita tanpa menampilkan confession.
+- Reveal dapat dijalankan memakai keyboard dan membuka confession serta penutup.
+- Read again kembali ke hero dan menutup chapter scroll.
+- Alur Reveal tetap berfungsi pada viewport ponsel dengan reduced motion, tanpa horizontal overflow.
+- Tidak ada uncaught browser page error selama perjalanan desktop.
+
+CI hanya menginstal Chromium untuk menjaga waktu dan biaya workflow tetap proporsional. Firefox, WebKit, screen reader, perangkat fisik, audio nyata, dan evaluasi visual tetap pemeriksaan manual.
 
 ## Checklist manual berdasarkan PRD
 

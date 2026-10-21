@@ -7,7 +7,11 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "oxlint",
-    "test": "node --test tests/journey.test.mjs"
+    "test": "node --test tests/journey.test.mjs",
+    "test:e2e": "playwright test",
+    "pretest:e2e": "npm run build",
+    "e2e:install": "playwright install chromium",
+    "verify": "npm run lint && npm test && npm run test:e2e"
   },
   "type": "module",
   "dependencies": {
@@ -18,6 +22,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -26,5 +31,8 @@
     "typescript": "7.0.2",
     "vite": "8.3.4"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  }
 }

@@ -8,7 +8,9 @@
 - Zod untuk memeriksa konfigurasi scene saat runtime.
 - GSAP + ScrollTrigger untuk transition/entrance dan parallax.
 - Web Audio API untuk ambience procedural; tidak ada file audio yang diunduh.
-- Oxlint dan Node.js test runner untuk pemeriksaan kode.
+- Oxlint dan Node.js test runner untuk lint serta unit test.
+- Playwright Test untuk E2E Chromium pada alur pembaca utama.
+- GitHub Actions untuk CI pada pull request dan push `main`; Vercel menyajikan static build dari `dist/`.
 
 `motion` tercantum sebagai dependency project, tetapi pengalaman saat ini memakai GSAP untuk motion.
 
@@ -36,7 +38,7 @@ src/
     └── useAmbience.ts         # Audio graph, volume, suspend, dan cleanup
 ```
 
-Automated journey checks berada di `tests/journey.test.mjs`.
+Automated journey checks berada di `tests/journey.test.mjs` dan browser E2E berada di `e2e/confession.spec.ts`. Konfigurasi Playwright menjalankan Vite preview atas hasil production build dan menaruh diagnostics di `.cache/playwright/`.
 
 ## Aliran data
 

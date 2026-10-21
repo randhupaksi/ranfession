@@ -31,6 +31,6 @@ PRD adalah konteks kebutuhan produk, bukan izin untuk membuat layanan lain atau 
 
 ## Pemeriksaan dan Git
 
-Perintah proyek ada di `package.json`. Saat diminta melakukan verifikasi, gunakan `npm run build`, `npm run lint`, dan `npm test` sesuai dampak perubahan. Perubahan visual juga membutuhkan review manual di browser/perangkat saat lingkungan tersedia; jangan mengklaimnya jika belum dilakukan.
+Perintah proyek ada di `package.json`. Jalankan pemeriksaan yang relevan dengan perubahan: `npm run lint`, `npm test`, `npm run build`, dan `npm run test:e2e`. E2E memakai Chromium Playwright; pasang browser lokal dengan `npm run e2e:install`, sedangkan workflow CI memasang Chromium beserta dependensi Linux. `npm run verify` menjalankan seluruh rangkaian tersebut setelah browser tersedia. Perubahan visual juga membutuhkan review manual di browser/perangkat saat lingkungan tersedia; jangan mengklaimnya jika belum dilakukan.
 
 Pertahankan perubahan pengguna yang sudah ada. Operasi Git read-only boleh dilakukan untuk memeriksa status/diff. Jangan menjalankan `git add`, commit, push, merge, rebase, reset, atau mengubah history kecuali pengguna secara spesifik meminta operasi tersebut. Permintaan “list Git command” berarti menyiapkan daftar teks dengan path spesifik, bukan menjalankan command.
