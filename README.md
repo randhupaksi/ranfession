@@ -1,43 +1,60 @@
 # Ranfession
 
-A quiet, interactive confession with a single-screen invitation, a scroll-led story, and one deliberate Final Click. Built with React, TypeScript, Vite, GSAP ScrollTrigger, Zod, and the Web Audio API.
+Ranfession is a personal confession told as a quiet digital letter. The experience opens with a single-screen invitation, moves into a scroll-led story, and keeps the confession itself behind one deliberate **Final Click**. It is designed to communicate honestly without asking the reader to respond.
 
-## Local development
+The visitor-facing interface and story copy are in English. Project documentation is in Indonesian.
 
-```sh
-npm install
+## Mulai di komputer lokal
+
+Gunakan Node.js dan npm, lalu jalankan:
+
+```powershell
+npm ci
 npm run dev
 ```
 
-```sh
-npm run build
-npm run preview
-npm run lint
-npm test
-```
+Perintah yang tersedia:
 
-## Personalize the story
+| Perintah | Kegunaan |
+| --- | --- |
+| `npm run dev` | Menjalankan Vite development server. |
+| `npm run build` | Menjalankan TypeScript build check lalu membuat situs statis di `dist/`. |
+| `npm run preview` | Melihat hasil build lokal dari folder `dist/`. Jalankan build lebih dulu. |
+| `npm run lint` | Menjalankan Oxlint. |
+| `npm test` | Menjalankan tes journey menggunakan Node test runner dan Vite SSR. |
 
-The automated checks cover scene validation and reordering, the invitation/scroll transition, the confession gate, replay, safe text rendering, unique heading IDs, and the default muted audio UI. They do not replace a visual mobile/browser review or listening to the ambience on a real device.
+## Sesuaikan cerita
 
-Edit `src/content/story.ts`. It is the source for the recipient/sender names, dedication, chapter text, button labels, and scene sequence. Empty names use natural neutral copy. The default story is illustrative; replace personal statements with your own true words before sharing.
+Mulai dari [`src/content/story.ts`](src/content/story.ts). Di sana terdapat judul, sapaan penerima, nama pengirim, dedication, label kontrol, opsi suasana, serta daftar scene. Ganti teks contoh dengan kata-kata yang benar-benar ingin kamu sampaikan sebelum membagikan situs.
 
-`visuals.orbitalAccent` and `visuals.grain` let you simplify the atmosphere. Section-specific ornaments (heart, thread, dots, quotation, orbit, pulse, and constellation motifs) live in `src/components/SectionDecor.tsx`; their shared styling is in `src/scroll-story.css`. Theme colors, typography, and spacing live in the CSS variables at the top of `src/index.css`.
+Aturan scene dan contoh bentuk konfigurasi dijelaskan di [Panduan menulis konten](docs/content-authoring.md). Jangan masukkan informasi yang kamu anggap rahasia: seluruh konten merupakan bagian dari website publik.
 
-Each scene has a unique `id`, a `type`, a label, and a heading. Narrative scenes also have a `layout` and a `fragments` array. Supported layouts are `editorial`, `fragments`, `quotation`, `realization`, and `quiet`. Optional `emphasis` is an italic second heading line. `continueLabel` customizes the invitation button and `revealLabel` customizes the Final Click.
+## Alur produk saat ini
 
-Keep exactly one `invitation` first, one `confession` before the end, and one `closing` last. Add, remove, or reorder narrative scenes freely. You can move the confession among the middle scenes; its interaction follows its type. Progress and navigation use the actual validated list. Invalid or duplicate optional scenes are skipped; broken essential roles use a safe three-scene fallback. Syntactically invalid TypeScript must be corrected before building.
+1. Penerima tiba di hero satu layar dan memilih **Begin**.
+2. Cerita berlanjut sebagai halaman yang dapat di-scroll. Tiap chapter punya komposisi berbeda; motion membantu memberi ritme, tetapi tidak menjadi syarat untuk membaca.
+3. Pengunjung dapat membaca sampai confession. Kalimat confession baru muncul setelah tombol **Reveal** ditekan.
+4. Setelah itu, halaman penutup tersedia. **Read again** mengulang pengalaman dari awal.
 
-The invitation mounts by itself. Begin transitions into native vertical scrolling; all narrative text is present for reading and assistive technology. ScrollTrigger adds entrances, a moving orbital line, and progress updates. Desktop Little Things uses a sticky heading with staggered, spacious fragments; mobile stacks them in normal flow.
+PRD awal mengusulkan interaksi klik pada setiap fragmen. Keputusan produk terbaru mengubah bentuk navigasi menjadi hero tetap lalu cerita scroll. Final Click, penutup tanpa tekanan untuk membalas, bahasa UI Inggris, audio opsional, dan batas privasi dari PRD tetap berlaku. Rinciannya ada di [Gambaran produk](docs/product-overview.md) dan [Traceability PRD](docs/requirements-traceability.md).
 
-The story stops at the confession until the reader presses Reveal. This action reveals the confession and mounts the remaining scenes, including the ending. The reader can scroll on or use the One last page link. The wordmark returns to the opening while preserving the confession within the visit; Read again resets it. Refresh starts at the invitation. Chapter anchors use normal browser hash navigation. No scroll is intercepted or forced into snap points.
+## Peta dokumentasi
 
-## Motion and sound
+- [AGENTS.md](AGENTS.md) — aturan kerja agent untuk repo ini.
+- [CLAUDE.md](CLAUDE.md) — instruksi Claude Code; menunjuk ke aturan repo yang sama.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — alur perubahan dan review.
+- [Gambaran produk](docs/product-overview.md) — visi, cakupan, dan alur yang berlaku.
+- [Traceability PRD](docs/requirements-traceability.md) — status implementasi AC-01 sampai AC-15 dan bukti yang tersedia.
+- [Arsitektur](docs/architecture.md) — struktur modul, state, validasi, dan batas sistem.
+- [Panduan menulis konten](docs/content-authoring.md) — cara mengubah scene dengan aman.
+- [Interaksi, aksesibilitas, dan motion](docs/interaction-accessibility-motion.md) — perilaku scroll, Final Click, fokus, serta reduced motion.
+- [Audio, privasi, dan publikasi](docs/audio-privacy-deployment.md) — Web Audio, data, `noindex`, dan hosting statis.
+- [Verifikasi](docs/verification.md) — perintah pengecekan dan skenario manual dari PRD.
 
-GSAP handles the invitation entrance, word-level text reveals, scroll-based chapter choreography, subtle numeral parallax, the orbital line, section ornaments, and the deliberate Final Click. System reduced motion and the on-page Reduce motion control remove these effects while keeping narrative text readable and the Final Click manual. ScrollTrigger instances are cleaned up whenever the view or motion preference changes.
+## Batas produk dan privasi
 
-Sound starts off. The Sound off button creates one low-volume procedural audio graph in a user gesture. Its volume control is available while sound is on. Muting fades out and suspends audio, hidden tabs suspend it, and the graph is disposed when the app unmounts. Unsupported or rejected audio falls back to silence.
+Situs ini tidak memiliki login, database, form balasan, chat, analytics penerima, atau backend pesan. Audio dibuat lokal di browser dan mati secara default. Tidak ada foto, video, font, atau lagu eksternal yang diperlukan. `noindex, nofollow` hanya meminta mesin pencari untuk tidak mengindeks halaman; URL tetap publik dan metadata tersebut bukan kontrol akses.
 
-## Publishing
+## Publikasi
 
-`npm run build` outputs a static website in `dist`. Deploy this directory to any static host. There is no backend, database, login, response form, analytics, or recipient tracking. All content is public to anyone with the URL. `noindex, nofollow` is set during preparation; this is a search visibility request, not access protection. There are no runtime external fonts, images, audio, or video dependencies.
+Jalankan `npm run build`, lalu host isi folder `dist/` pada layanan hosting statis. Belum ada konfigurasi backend atau environment variable yang diperlukan oleh aplikasi.
