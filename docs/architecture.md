@@ -6,7 +6,7 @@
 - TypeScript untuk tipe dan build check.
 - Vite untuk development server dan static build.
 - Zod untuk memeriksa konfigurasi scene saat runtime.
-- GSAP + ScrollTrigger untuk transition/entrance dan parallax.
+- GSAP + ScrollTrigger untuk transition dan entrance per blok cerita.
 - Web Audio API untuk ambience procedural; tidak ada file audio yang diunduh.
 - Oxlint dan Node.js test runner untuk lint serta unit test.
 - Playwright Test untuk E2E Chromium pada alur pembaca utama.

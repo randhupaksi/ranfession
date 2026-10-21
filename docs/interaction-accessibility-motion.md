@@ -25,9 +25,9 @@ Tidak ada snap-scroll atau scroll hijacking. Ukuran teks/zoom boleh membuat doku
 
 ## Motion
 
-`useStoryMotion` menggunakan GSAP dan ScrollTrigger untuk entrance hero, entrance kata per kata, dekorasi, numeral parallax, orbital background, transisi view, dan Final Click. Semua konten adalah DOM text; animasi tidak membuka gate state selain Final Click.
+`useStoryMotion` menggunakan GSAP dan ScrollTrigger untuk entrance hero, judul dan blok cerita, transisi view, dan Final Click. Kata pada judul bergerak dalam satu animasi per judul, sedangkan isi cerita dianimasikan per blok untuk mengurangi pekerjaan browser saat scroll. Dekorasi dan tekstur latar tetap statis. Semua konten adalah DOM text; animasi tidak membuka gate state selain Final Click.
 
-- Preferensi sistem `prefers-reduced-motion` menghapus entrance/parallax yang tidak perlu.
+- Preferensi sistem `prefers-reduced-motion` menghapus entrance yang tidak perlu.
 - Jika sistem tidak meminta reduced motion, tersedia kontrol **Reduce motion / Enable motion**.
 - Final Click tetap memerlukan aksi pengguna dalam semua mode; reduced motion hanya menghilangkan animasi reveal.
 - Audio terpisah dari motion dan juga tidak memulai otomatis.

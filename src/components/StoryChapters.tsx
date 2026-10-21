@@ -22,11 +22,16 @@ export function StoryChapters({ scenes, state, onReveal, onRestart, transitionin
     {chapters.map((scene, index) => {
       const next = chapters[index + 1]
       const layout = scene.type === 'narrative' ? scene.layout : scene.type
+      const pageNumber = scenes.findIndex((item) => item.id === scene.id) + 1
       return <section key={scene.id} id={`chapter-${scene.id}`} className={`story-section section-${layout}`}
         data-story-section data-chapter={index + 1} data-label={scene.label} aria-labelledby={`heading-${scene.id}`}>
         <SectionDecor scene={scene} index={index + 1} />
-        <span className="chapter-numeral" aria-hidden="true">{String(index + 2).padStart(2, '0')}</span>
+        <span className="chapter-numeral" aria-hidden="true">{String(pageNumber).padStart(2, '0')}</span>
         <div className="section-inner">
+          <div className="chapter-index" aria-hidden="true">
+            <span className="chapter-index-label">Ranfession · page</span>
+            <span className="chapter-index-count">{String(pageNumber).padStart(2, '0')} <i /> {String(scenes.length).padStart(2, '0')}</span>
+          </div>
           <SceneContent scene={scene} headingTag="h2" headingId={`heading-${scene.id}`}
             revealed={scene.type === 'narrative' ? scene.fragments.length : scene.type === 'confession' && state.confessionRevealed ? 1 : 0}>
             {scene.type === 'confession' && <div className="section-actions confession-actions">
