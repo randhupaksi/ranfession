@@ -168,31 +168,36 @@
 .section-editorial .fragment p { color: #49403d; font-size: 15px; line-height: 1.8; }
 .section-editorial .chapter-numeral { opacity: .025; }
 
-/* Small observations become separate paper scraps with their own rhythm. */
-.section-fragments { --chapter-accent: var(--rose); align-items: flex-start; min-height: 148svh; padding-top: 120px; padding-bottom: 120px; background: linear-gradient(110deg, transparent 0 58%, rgba(216, 166, 164, .045) 58% 100%); }
-.section-fragments .section-inner { align-self: stretch; }
-.section-fragments .layout-fragments { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); align-items: start; column-gap: clamp(54px, 9vw, 136px); height: 100%; }
-.section-fragments .scene-eyebrow { grid-column: 1 / -1; margin-bottom: clamp(34px, 6vh, 66px); }
-.section-fragments .scene-heading { position: sticky; top: 28vh; align-self: start; grid-column: 1; grid-row: 2; font-size: clamp(54px, 6.1vw, 88px); }
-.section-fragments .fragments { grid-column: 2; grid-row: 2; margin: 0; }
-.section-fragments .fragment-slot {
-  display: flex;
-  align-items: center;
-  min-height: 30svh;
-  padding: clamp(24px, 3.2vw, 38px);
+/* Keep the small observations together like one annotated keepsake. */
+.section-fragments { --chapter-accent: var(--rose); align-items: center; min-height: 108svh; padding-block: clamp(90px, 12vh, 132px); background: linear-gradient(110deg, transparent 0 58%, rgba(216, 166, 164, .045) 58% 100%); }
+.section-fragments .section-inner { align-self: center; }
+.section-fragments .layout-fragments { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); align-items: center; column-gap: clamp(54px, 9vw, 136px); }
+.section-fragments .scene-eyebrow { grid-column: 1 / -1; margin-bottom: clamp(28px, 4vh, 46px); }
+.section-fragments .scene-heading { grid-column: 1; grid-row: 2; font-size: clamp(54px, 6.1vw, 88px); }
+.section-fragments .fragments {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  width: min(100%, 580px);
+  margin: 0;
+  min-height: 0;
+  padding: clamp(28px, 4vw, 48px) clamp(24px, 4.2vw, 52px);
   border: 1px solid rgba(78, 61, 56, .12);
-  border-radius: 4px 18px 3px 15px;
-  background: var(--paper);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, .16);
+  border-radius: 4px 22px 5px 18px;
+  background: linear-gradient(150deg, #ead9c5, var(--paper) 64%, #e7d4bf);
+  box-shadow: 12px 14px 0 rgba(216, 166, 164, .075), 0 22px 54px rgba(0, 0, 0, .19);
   color: #342e30;
+  transform: rotate(.45deg);
 }
-.section-fragments .fragment-slot:nth-child(odd) { transform: rotate(-1deg); }
-.section-fragments .fragment-slot:nth-child(even) { margin-left: clamp(16px, 4vw, 52px); transform: rotate(1.15deg); }
-.section-fragments .fragment-slot + .fragment-slot { margin-top: 25px; }
-.section-fragments .fragment-slot::after { position: absolute; top: 20px; right: 20px; color: #a36f72; content: '✧'; font-size: 15px; opacity: .7; }
-.section-fragments .fragment { gap: 20px; }
-.section-fragments .fragment-number { color: #a36f72; font-size: 14px; }
-.section-fragments .fragment p { color: #403838; font-family: var(--serif); font-size: clamp(22px, 2.45vw, 34px); line-height: 1.52; letter-spacing: -.015em; }
+.section-fragments .fragments::before { position: absolute; top: 20px; right: 22px; color: #a36f72; content: '✧'; font-size: 14px; opacity: .72; }
+.section-fragments .fragment-slot { min-height: 0; padding: 16px 0 19px; border: 0; border-bottom: 1px dashed rgba(78, 61, 56, .24); background: none; box-shadow: none; color: inherit; transform: none; }
+.section-fragments .fragment-slot:first-child { padding-top: 0; }
+.section-fragments .fragment-slot:last-child { padding-bottom: 0; border-bottom: 0; }
+.section-fragments .fragment-slot + .fragment-slot { margin: 0; }
+.section-fragments .fragment-slot::after { content: none; }
+.section-fragments .fragment { align-items: flex-start; gap: 18px; }
+.section-fragments .fragment-number { flex: 0 0 22px; padding-top: 5px; color: #a36f72; font-size: 12px; }
+.section-fragments .fragment p { color: #403838; font-family: var(--serif); font-size: clamp(20px, 2.15vw, 28px); line-height: 1.55; letter-spacing: -.015em; }
 
 /* The quiet moments are staged like an oversized printed quotation. */
 .section-quotation { --chapter-accent: var(--champagne); min-height: 112svh; background: radial-gradient(ellipse at 20% 32%, rgba(189, 169, 144, .1), transparent 33%); }
@@ -411,10 +416,11 @@
   .section-fragments .scene-eyebrow { margin-bottom: 28px; }
   .section-fragments .scene-heading { position: static; margin-bottom: 34px; font-size: clamp(44px, 11.4vw, 70px); }
   .section-fragments .fragments { margin-top: 0; }
-  .section-fragments .fragment-slot { min-height: 0; padding: 25px; }
-  .section-fragments .fragment-slot + .fragment-slot { margin-top: 18px; }
-  .section-fragments .fragment-slot:nth-child(even) { margin-left: 14px; }
-  .section-fragments .fragment p { font-size: clamp(21px, 5.8vw, 29px); }
+  .section-fragments .fragments { width: 100%; padding: 30px 26px; transform: rotate(.25deg); }
+  .section-fragments .fragments::before { top: 15px; right: 17px; }
+  .section-fragments .fragment-slot { padding-block: 16px; }
+  .section-fragments .fragment { gap: 13px; }
+  .section-fragments .fragment p { font-size: clamp(19px, 5.3vw, 23px); }
   .section-quotation .layout-quotation::before { top: -14px; left: -8px; font-size: 110px; }
   .section-quotation .fragments { max-width: none; margin-top: 32px; padding-left: 18px; }
   .section-realization .fragments { max-width: none; margin-top: 34px; padding-left: 18px; }
@@ -492,7 +498,7 @@
 @media (max-width: 350px) {
   .hero-stage .layout-invitation .scene-heading { font-size: clamp(34px, 11.5vw, 42px); }
   .chapter-index-label { font-size: 7px; }
-  .section-fragments .fragment-slot { padding: 21px; }
+  .section-fragments .fragments { padding-inline: 20px; }
   .section-fragments .fragment { gap: 13px; }
   .reading-rail .motion-button { font-size: 8px; }
 }

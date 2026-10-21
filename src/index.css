@@ -24,7 +24,28 @@
   --content-width: 1280px;
 }
 * { box-sizing: border-box; }
-html { min-width: 280px; scroll-behavior: smooth; }
+html {
+  min-width: 280px;
+  scroll-behavior: smooth;
+  scrollbar-color: var(--champagne) var(--charcoal);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #171619, var(--charcoal));
+  border-left: 1px solid rgba(189, 169, 144, .12);
+}
+::-webkit-scrollbar-thumb {
+  min-height: 44px;
+  border: 3px solid var(--charcoal);
+  border-radius: 99px;
+  background: linear-gradient(180deg, var(--rose), var(--champagne));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e6b8b5, #d5c1a7);
+}
+::-webkit-scrollbar-corner { background: var(--charcoal); }
 body { margin: 0; min-width: 280px; }
 button, input { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
