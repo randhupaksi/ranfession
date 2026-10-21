@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "test": "node --test tests/journey.test.mjs"
   },
   "type": "module",
   "dependencies": {
