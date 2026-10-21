@@ -6,7 +6,7 @@ The visitor-facing interface and story copy are in English. Project documentatio
 
 ## Mulai di komputer lokal
 
-Gunakan Node.js dan npm, lalu jalankan:
+Gunakan Node.js 24.x dan npm, lalu jalankan:
 
 ```powershell
 npm ci
@@ -22,6 +22,11 @@ Perintah yang tersedia:
 | `npm run preview` | Melihat hasil build lokal dari folder `dist/`. Jalankan build lebih dulu. |
 | `npm run lint` | Menjalankan Oxlint. |
 | `npm test` | Menjalankan tes journey menggunakan Node test runner dan Vite SSR. |
+| `npm run test:e2e` | Build situs lalu menjalankan E2E pada Vite preview lokal. |
+| `npm run e2e:install` | Mengunduh browser Chromium yang dibutuhkan Playwright. Di Windows, E2E lokal memakai Microsoft Edge jika terpasang. |
+| `npm run verify` | Menjalankan lint, unit test, build otomatis sebelum E2E, dan E2E. |
+
+Di komputer baru, jalankan `npm run e2e:install` sebelum `npm run test:e2e` bila tidak memakai Edge lokal. GitHub Actions memasang Chromium beserta dependensinya otomatis.
 
 ## Sesuaikan cerita
 
@@ -55,6 +60,10 @@ PRD awal mengusulkan interaksi klik pada setiap fragmen. Keputusan produk terbar
 
 Situs ini tidak memiliki login, database, form balasan, chat, analytics penerima, atau backend pesan. Audio dibuat lokal di browser dan mati secara default. Tidak ada foto, video, font, atau lagu eksternal yang diperlukan. `noindex, nofollow` hanya meminta mesin pencari untuk tidak mengindeks halaman; URL tetap publik dan metadata tersebut bukan kontrol akses.
 
-## Publikasi
+## CI dan publikasi ke Vercel
 
-Jalankan `npm run build`, lalu host isi folder `dist/` pada layanan hosting statis. Belum ada konfigurasi backend atau environment variable yang diperlukan oleh aplikasi.
+GitHub Actions menjalankan lint, unit test, build, dan Playwright E2E pada pull request dan push ke `main`. Lihat hasilnya di tab **Actions** pada repository GitHub.
+
+Konfigurasi [`vercel.json`](vercel.json) menetapkan Vite, `npm ci`, `npm run build`, dan folder output `dist/`. Untuk mengaktifkan CI/CD deployment, import repository GitHub ini ke Vercel dan biarkan Vercel terhubung ke Git provider. Vercel dapat membuat preview deployment untuk pull request dan deployment produksi untuk perubahan yang digabung ke production branch sesuai pengaturan project. Tidak ada backend, secret, atau environment variable aplikasi yang diperlukan.
+
+Sebelum membagikan URL publik, personalisasi konten di `src/content/story.ts`; semua teks yang dibuild tersedia bagi pengunjung. Build lokal dapat diperiksa lewat `npm run build` dan `npm run preview`.
