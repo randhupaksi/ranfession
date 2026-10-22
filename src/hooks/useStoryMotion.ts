@@ -12,60 +12,140 @@ interface Options {
   onChapter: (index: number) => void
 }
 
-type MotionKind = 'decor' | 'eyebrow' | 'fragments' | 'index' | 'lift' | 'line' | 'meta' | 'ornament' | 'parallax' | 'soft' | 'thread' | 'words'
+type MotionKind =
+  | 'decor'
+  | 'eyebrow'
+  | 'fragments'
+  | 'index'
+  | 'lift'
+  | 'line'
+  | 'meta'
+  | 'ornament'
+  | 'parallax'
+  | 'soft'
+  | 'thread'
+  | 'words'
 type PendingTrigger = { target: HTMLElement; animation: gsap.core.Animation }
 type DirectionalMotion = PendingTrigger & { playAt: number; reverseAt: number }
 type DirectionalMotionController = { add: (motions: PendingTrigger[]) => void }
 
-function createMotion(target: HTMLElement, kind: MotionKind, paused = true, measuredOpacity?: number) {
+function createMotion(
+  target: HTMLElement,
+  kind: MotionKind,
+  paused = true,
+  measuredOpacity?: number,
+) {
   const timeline = gsap.timeline({ paused })
-  const endOpacity = measuredOpacity ?? (Number.parseFloat(window.getComputedStyle(target).opacity) || 1)
-  const fromTo = (targets: gsap.TweenTarget, fromVars: gsap.TweenVars, toVars: gsap.TweenVars, position = 0) =>
-    timeline.fromTo(targets, fromVars, toVars, position)
-  const addLine = (line: HTMLElement, position = 0, duration = .8) => {
-    fromTo(line, { scaleX: 0, transformOrigin: 'left center' }, {
-      scaleX: 1, duration, ease: 'power1.out',
-    }, position)
+  const endOpacity =
+    measuredOpacity ?? (Number.parseFloat(window.getComputedStyle(target).opacity) || 1)
+  const fromTo = (
+    targets: gsap.TweenTarget,
+    fromVars: gsap.TweenVars,
+    toVars: gsap.TweenVars,
+    position = 0,
+  ) => timeline.fromTo(targets, fromVars, toVars, position)
+  const addLine = (line: HTMLElement, position = 0, duration = 0.8) => {
+    fromTo(
+      line,
+      { scaleX: 0, transformOrigin: 'left center' },
+      {
+        scaleX: 1,
+        duration,
+        ease: 'power1.out',
+      },
+      position,
+    )
   }
 
   switch (kind) {
     case 'decor':
       if (target.closest('.hero-stage')) {
-        fromTo(target, { opacity: 0, scale: .92, rotation: -5 }, {
-          opacity: .7, scale: 1, rotation: 0, duration: 1.2, delay: .18, ease: 'power1.out',
-        })
+        fromTo(
+          target,
+          { opacity: 0, scale: 0.92, rotation: -5 },
+          {
+            opacity: 0.7,
+            scale: 1,
+            rotation: 0,
+            duration: 1.2,
+            delay: 0.18,
+            ease: 'power1.out',
+          },
+        )
       } else {
-        fromTo(target, { y: 18, scale: .92, rotation: -4, opacity: 0 }, {
-          y: 0, scale: 1, rotation: 0, opacity: endOpacity, duration: 1.1, ease: 'power1.out',
-        })
+        fromTo(
+          target,
+          { y: 18, scale: 0.92, rotation: -4, opacity: 0 },
+          {
+            y: 0,
+            scale: 1,
+            rotation: 0,
+            opacity: endOpacity,
+            duration: 1.1,
+            ease: 'power1.out',
+          },
+        )
       }
       break
     case 'eyebrow': {
-      fromTo(target, { y: 18, opacity: 0 }, {
-        y: 0, opacity: 1, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       const rule = target.querySelector<HTMLElement>('.eyebrow-rule')
-      if (rule) addLine(rule, target.closest('.hero-stage') ? .1 : 0, .8)
+      if (rule) addLine(rule, target.closest('.hero-stage') ? 0.1 : 0, 0.8)
       break
     }
     case 'fragments': {
-      fromTo(target, { y: 22, scale: .97, opacity: 0 }, {
-        y: 0, scale: 1, opacity: 1, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 22, scale: 0.97, opacity: 0 },
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       const rows = target.querySelectorAll<HTMLElement>('.fragment-slot')
-      if (rows.length) fromTo(rows, { y: 18, opacity: 0, rotation: (index) => index % 2 ? 1.2 : -1.2 }, {
-        y: 0, opacity: 1, rotation: 0, duration: .92, stagger: .12, ease: 'power1.out',
-      }, .04)
+      if (rows.length)
+        fromTo(
+          rows,
+          { y: 18, opacity: 0, rotation: index => (index % 2 ? 1.2 : -1.2) },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 0.92,
+            stagger: 0.12,
+            ease: 'power1.out',
+          },
+          0.04,
+        )
       break
     }
     case 'index': {
-      fromTo(target, { y: 18, opacity: 0 }, {
-        y: 0, opacity: 1, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       const divider = target.querySelector<HTMLElement>('.chapter-index-divider')
       if (divider) addLine(divider)
       const smallRule = target.querySelector<HTMLElement>('.chapter-index-count i')
-      if (smallRule) addLine(smallRule, .08)
+      if (smallRule) addLine(smallRule, 0.08)
       break
     }
     case 'line':
@@ -73,57 +153,132 @@ function createMotion(target: HTMLElement, kind: MotionKind, paused = true, meas
       break
     case 'meta': {
       const isHero = Boolean(target.closest('.hero-stage'))
-      fromTo(target, { y: 18, opacity: isHero ? Math.min(endOpacity, .55) : 0 }, {
-        y: 0, opacity: endOpacity, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, opacity: isHero ? Math.min(endOpacity, 0.55) : 0 },
+        {
+          y: 0,
+          opacity: endOpacity,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       const divider = target.querySelector<HTMLElement>('.journey-meta-divider')
       if (divider) addLine(divider)
       break
     }
     case 'ornament':
-      fromTo(target, { y: 18, scale: .92, rotation: -4, opacity: 0 }, {
-        y: 0, scale: 1, rotation: 0, opacity: endOpacity, duration: 1.1, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, scale: 0.92, rotation: -4, opacity: 0 },
+        {
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          opacity: endOpacity,
+          duration: 1.1,
+          ease: 'power1.out',
+        },
+      )
       break
     case 'soft': {
       const isHero = Boolean(target.closest('.hero-stage'))
-      fromTo(target, { y: 18, opacity: isHero ? Math.min(endOpacity, .55) : 0 }, {
-        y: 0, opacity: endOpacity, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, opacity: isHero ? Math.min(endOpacity, 0.55) : 0 },
+        {
+          y: 0,
+          opacity: endOpacity,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       if (target.classList.contains('scroll-cue')) {
         const cueLine = target.querySelector<HTMLElement>('.scroll-cue-line')
-        if (cueLine) timeline.fromTo(cueLine, { scaleY: 0, transformOrigin: 'center top' }, {
-          scaleY: 1, duration: .8, ease: 'power1.out',
-        }, .08)
+        if (cueLine)
+          timeline.fromTo(
+            cueLine,
+            { scaleY: 0, transformOrigin: 'center top' },
+            {
+              scaleY: 1,
+              duration: 0.8,
+              ease: 'power1.out',
+            },
+            0.08,
+          )
       }
       break
     }
     case 'thread':
-      fromTo(target, { scaleY: 0, transformOrigin: 'top center', opacity: 0 }, {
-        scaleY: 1, opacity: endOpacity, duration: 1.15, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { scaleY: 0, transformOrigin: 'top center', opacity: 0 },
+        {
+          scaleY: 1,
+          opacity: endOpacity,
+          duration: 1.15,
+          ease: 'power1.out',
+        },
+      )
       break
     case 'words': {
       const words = target.querySelectorAll<HTMLElement>('.motion-word')
       const isHero = Boolean(target.closest('.hero-stage'))
-      if (words.length && isHero) fromTo(words, { y: 54, opacity: 0, rotation: 2.5 }, {
-        y: 0, opacity: 1, rotation: 0, duration: 1.1, stagger: .05, ease: 'power1.out',
-      })
-      else if (words.length) fromTo(words, {
-        y: 42, opacity: 0,
-        rotation: (index) => index % 2 ? -1.2 : 1.2,
-      }, {
-        y: 0, opacity: 1, rotation: 0, duration: 1.05, stagger: .045, ease: 'power1.out',
-      }, .025)
-      else fromTo(target, { y: 34, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 1.05, ease: 'power1.out',
-      })
+      if (words.length && isHero)
+        fromTo(
+          words,
+          { y: 54, opacity: 0, rotation: 2.5 },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 1.1,
+            stagger: 0.05,
+            ease: 'power1.out',
+          },
+        )
+      else if (words.length)
+        fromTo(
+          words,
+          {
+            y: 42,
+            opacity: 0,
+            rotation: index => (index % 2 ? -1.2 : 1.2),
+          },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 1.05,
+            stagger: 0.045,
+            ease: 'power1.out',
+          },
+          0.025,
+        )
+      else
+        fromTo(
+          target,
+          { y: 34, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.05,
+            ease: 'power1.out',
+          },
+        )
       break
     }
     case 'lift':
-      fromTo(target, { y: 18, opacity: 0 }, {
-        y: 0, opacity: endOpacity, duration: .9, ease: 'power1.out',
-      })
+      fromTo(
+        target,
+        { y: 18, opacity: 0 },
+        {
+          y: 0,
+          opacity: endOpacity,
+          duration: 0.9,
+          ease: 'power1.out',
+        },
+      )
       break
   }
 
@@ -140,8 +295,15 @@ function getLayoutTop(target: HTMLElement) {
   return top
 }
 
-function createDirectionalMotionController(scrollRoot: HTMLElement, pending: PendingTrigger[]): DirectionalMotionController {
-  const motions: DirectionalMotion[] = pending.map((motion) => ({ ...motion, playAt: 0, reverseAt: 0 }))
+function createDirectionalMotionController(
+  scrollRoot: HTMLElement,
+  pending: PendingTrigger[],
+): DirectionalMotionController {
+  const motions: DirectionalMotion[] = pending.map(motion => ({
+    ...motion,
+    playAt: 0,
+    reverseAt: 0,
+  }))
   let playOrder: DirectionalMotion[] = []
   let reverseOrder: DirectionalMotion[] = []
   let previousScroll = window.scrollY
@@ -157,8 +319,8 @@ function createDirectionalMotionController(scrollRoot: HTMLElement, pending: Pen
   const measure = (scrollPosition?: number) => {
     for (const motion of motions) {
       const top = getLayoutTop(motion.target)
-      motion.playAt = top - window.innerHeight * .88
-      motion.reverseAt = top - window.innerHeight * .96
+      motion.playAt = top - window.innerHeight * 0.88
+      motion.reverseAt = top - window.innerHeight * 0.96
     }
     playOrder = [...motions].sort((a, b) => a.playAt - b.playAt)
     reverseOrder = [...motions].sort((a, b) => a.reverseAt - b.reverseAt)
@@ -176,7 +338,11 @@ function createDirectionalMotionController(scrollRoot: HTMLElement, pending: Pen
     return low
   }
 
-  const firstAtOrAfter = (items: DirectionalMotion[], key: 'playAt' | 'reverseAt', value: number) => {
+  const firstAtOrAfter = (
+    items: DirectionalMotion[],
+    key: 'playAt' | 'reverseAt',
+    value: number,
+  ) => {
     let low = 0
     let high = items.length
     while (low < high) {
@@ -208,18 +374,18 @@ function createDirectionalMotionController(scrollRoot: HTMLElement, pending: Pen
     trigger: scrollRoot,
     start: 'top top',
     end: 'bottom bottom',
-    onRefresh: (self) => {
+    onRefresh: self => {
       measure(self.scroll())
       previousScroll = self.scroll()
     },
-    onUpdate: (self) => handleScroll(self.scroll()),
+    onUpdate: self => handleScroll(self.scroll()),
   })
   measure(window.scrollY)
   previousScroll = window.scrollY
 
   return {
-    add: (newMotions) => {
-      motions.push(...newMotions.map((motion) => ({ ...motion, playAt: 0, reverseAt: 0 })))
+    add: newMotions => {
+      motions.push(...newMotions.map(motion => ({ ...motion, playAt: 0, reverseAt: 0 })))
       measure(window.scrollY)
       previousScroll = window.scrollY
     },
@@ -237,10 +403,15 @@ function attachScrollMotion(
   if (kind === 'parallax') {
     const section = target.closest<HTMLElement>('[data-story-section]')
     if (!section) return
-    gsap.fromTo(target, { y: 55 }, {
-      y: -65, ease: 'none',
-      scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: .8 },
-    })
+    gsap.fromTo(
+      target,
+      { y: 55 },
+      {
+        y: -65,
+        ease: 'none',
+        scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
+      },
+    )
     return
   }
 
@@ -276,7 +447,11 @@ function attachSectionMotion(
   const targets = section.querySelectorAll<HTMLElement>('[data-motion]')
   for (const target of targets) {
     // The confession line gets its own word-level reveal after Final Click.
-    if (target.classList.contains('scene-heading') && section.classList.contains('section-confession')) continue
+    if (
+      target.classList.contains('scene-heading') &&
+      section.classList.contains('section-confession')
+    )
+      continue
     attachScrollMotion(
       target,
       target.dataset.motion as MotionKind,
@@ -298,20 +473,26 @@ export function useStoryMotion({ root, started, revealed, reduced, onChapter }: 
     previousStarted.current = started
     gsap.registerPlugin(ScrollTrigger)
     const element = root.current
-    const sections = started
-      ? gsap.utils.toArray<HTMLElement>('[data-story-section]', element)
-      : []
+    const sections = started ? gsap.utils.toArray<HTMLElement>('[data-story-section]', element) : []
     const measuredBounds = new Map<HTMLElement, DOMRect>()
     const measuredOpacities = new Map<HTMLElement, number>()
     if (!reduced) {
       // Read geometry and computed styles before GSAP applies entrance transforms,
       // avoiding repeated read/write layout and style flushes during trigger setup.
-      sections.forEach((section) => {
-        section.querySelectorAll<HTMLElement>('[data-motion]').forEach((target) => {
-          if (target.dataset.motion !== 'parallax'
-            && !(target.classList.contains('scene-heading') && section.classList.contains('section-confession'))) {
+      sections.forEach(section => {
+        section.querySelectorAll<HTMLElement>('[data-motion]').forEach(target => {
+          if (
+            target.dataset.motion !== 'parallax' &&
+            !(
+              target.classList.contains('scene-heading') &&
+              section.classList.contains('section-confession')
+            )
+          ) {
             measuredBounds.set(target, target.getBoundingClientRect())
-            measuredOpacities.set(target, Number.parseFloat(window.getComputedStyle(target).opacity) || 1)
+            measuredOpacities.set(
+              target,
+              Number.parseFloat(window.getComputedStyle(target).opacity) || 1,
+            )
           }
         })
       })
@@ -321,16 +502,29 @@ export function useStoryMotion({ root, started, revealed, reduced, onChapter }: 
       if (!started) {
         if (!reduced) {
           const intro = gsap.timeline()
-          if (header) intro.fromTo(header, { y: -9, opacity: .58 }, {
-            y: 0, opacity: 1, duration: .62, ease: 'power1.out',
-          }, 0)
+          if (header)
+            intro.fromTo(
+              header,
+              { y: -9, opacity: 0.58 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.62,
+                ease: 'power1.out',
+              },
+              0,
+            )
           const targets = gsap.utils.toArray<HTMLElement>('.hero-stage [data-motion]', element)
           targets.forEach((target, index) => {
             const kind = target.dataset.motion as MotionKind
-            const position = kind === 'words' ? 0
-              : kind === 'eyebrow' ? 0
-                : kind === 'decor' ? 0
-                  : Math.max(.12, index * .07)
+            const position =
+              kind === 'words'
+                ? 0
+                : kind === 'eyebrow'
+                  ? 0
+                  : kind === 'decor'
+                    ? 0
+                    : Math.max(0.12, index * 0.07)
             intro.add(createMotion(target, kind, false), position)
           })
         }
@@ -339,37 +533,82 @@ export function useStoryMotion({ root, started, revealed, reduced, onChapter }: 
       }
 
       if (!reduced && viewJustStarted) {
-        if (header) gsap.fromTo(header, { y: -9, opacity: .58 }, {
-          y: 0, opacity: 1, duration: .62, ease: 'power1.out',
-        })
-        gsap.fromTo('.reading-rail', { x: 10, opacity: .58 }, {
-          x: 0, opacity: 1, duration: .68, ease: 'power1.out',
-        })
+        if (header)
+          gsap.fromTo(
+            header,
+            { y: -9, opacity: 0.58 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.62,
+              ease: 'power1.out',
+            },
+          )
+        gsap.fromTo(
+          '.reading-rail',
+          { x: 10, opacity: 0.58 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.68,
+            ease: 'power1.out',
+          },
+        )
         const thread = element.querySelector<HTMLElement>('.story-thread')
         if (thread) createMotion(thread, 'thread').play(0)
       }
 
       const pendingTriggers: PendingTrigger[] = []
-      sections.forEach((section, index) => attachSectionMotion(
-        section,
-        reduced,
-        onChapter,
-        pendingTriggers,
-        viewJustStarted && index === 0,
-        measuredBounds,
-        measuredOpacities,
-      ))
+      sections.forEach((section, index) =>
+        attachSectionMotion(
+          section,
+          reduced,
+          onChapter,
+          pendingTriggers,
+          viewJustStarted && index === 0,
+          measuredBounds,
+          measuredOpacities,
+        ),
+      )
       const scrollRoot = element.querySelector<HTMLElement>('.scroll-story')
       if (!reduced && scrollRoot && pendingTriggers.length) {
-        directionalController.current = createDirectionalMotionController(scrollRoot, pendingTriggers)
+        directionalController.current = createDirectionalMotionController(
+          scrollRoot,
+          pendingTriggers,
+        )
       }
       if (storyConfig.visuals.orbitalAccent && !reduced) {
-        const orbit = gsap.timeline({ scrollTrigger: { trigger: '.scroll-story', start: 'top top', end: 'bottom bottom', scrub: 1.1 } })
-        orbit.fromTo('.orbit', { xPercent: 25, yPercent: -3, rotation: -20, scale: 1 }, {
-          xPercent: -22, yPercent: 5, rotation: 110, scale: .9, duration: 2, ease: 'none',
-        }).to('.orbit', { xPercent: 0, yPercent: 0, rotation: 290, scale: 1.06, duration: 3, ease: 'none' })
+        const orbit = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.scroll-story',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.1,
+          },
+        })
+        orbit
+          .fromTo(
+            '.orbit',
+            { xPercent: 25, yPercent: -3, rotation: -20, scale: 1 },
+            {
+              xPercent: -22,
+              yPercent: 5,
+              rotation: 110,
+              scale: 0.9,
+              duration: 2,
+              ease: 'none',
+            },
+          )
+          .to('.orbit', {
+            xPercent: 0,
+            yPercent: 0,
+            rotation: 290,
+            scale: 1.06,
+            duration: 3,
+            ease: 'none',
+          })
       } else {
-        gsap.set('.orbit', { xPercent: 0, yPercent: 0, rotation: 20, scale: .95 })
+        gsap.set('.orbit', { xPercent: 0, yPercent: 0, rotation: 20, scale: 0.95 })
       }
     }, element)
     return () => {
@@ -382,7 +621,10 @@ export function useStoryMotion({ root, started, revealed, reduced, onChapter }: 
     const freshlyRevealed = revealed && !previousReveal.current
     previousReveal.current = revealed
     if (!started || !revealed || !root.current) return
-    if (freshlyRevealed) root.current.querySelector<HTMLElement>('.confession-actions .text-link')?.focus({ preventScroll: true })
+    if (freshlyRevealed)
+      root.current
+        .querySelector<HTMLElement>('.confession-actions .text-link')
+        ?.focus({ preventScroll: true })
     const dynamicContext = gsap.context(() => {
       const sections = root.current?.querySelectorAll<HTMLElement>('[data-story-section]')
       const closingSection = sections?.[sections.length - 1]
@@ -393,16 +635,34 @@ export function useStoryMotion({ root, started, revealed, reduced, onChapter }: 
       }
     }, root)
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh())
-    if (reduced) return () => { cancelAnimationFrame(frame); dynamicContext.revert() }
+    if (reduced)
+      return () => {
+        cancelAnimationFrame(frame)
+        dynamicContext.revert()
+      }
     const statement = root.current.querySelector<HTMLElement>('.confession-line')
-    if (!statement) return () => { cancelAnimationFrame(frame); dynamicContext.revert() }
+    if (!statement)
+      return () => {
+        cancelAnimationFrame(frame)
+        dynamicContext.revert()
+      }
     const confessionContext = gsap.context(() => {
-      const animation = gsap.fromTo('.confession-word', { opacity: 0, y: 42 }, {
-        opacity: 1, y: 0, stagger: .12, duration: 1.15, ease: 'power1.out', paused: true,
-      })
+      const animation = gsap.fromTo(
+        '.confession-word',
+        { opacity: 0, y: 42 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 1.15,
+          ease: 'power1.out',
+          paused: true,
+        },
+      )
       directionalController.current?.add([{ target: statement, animation }])
       if (freshlyRevealed) animation.play(0)
-      else if (statement.getBoundingClientRect().top < window.innerHeight * .88) animation.progress(1).pause()
+      else if (statement.getBoundingClientRect().top < window.innerHeight * 0.88)
+        animation.progress(1).pause()
     }, root)
     return () => {
       cancelAnimationFrame(frame)

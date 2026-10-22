@@ -6,6 +6,8 @@ import { ExperienceBoundary } from './components/ExperienceBoundary'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ExperienceBoundary><App /></ExperienceBoundary>
+    <ExperienceBoundary>
+      <App />
+    </ExperienceBoundary>
   </StrictMode>,
 )

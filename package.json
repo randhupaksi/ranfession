@@ -11,7 +11,9 @@
     "test:e2e": "playwright test",
     "pretest:e2e": "npm run build",
     "e2e:install": "playwright install chromium",
-    "verify": "npm run lint && npm test && npm run test:e2e"
+    "verify": "npm run lint && npm run format:check && npm test && npm run test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "type": "module",
   "dependencies": {
@@ -28,6 +30,7 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
     "oxlint": "1.89.0",
+    "prettier": "3.9.10",
     "typescript": "7.0.2",
     "vite": "8.3.4"
   },

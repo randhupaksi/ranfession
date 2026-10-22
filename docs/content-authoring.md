@@ -18,15 +18,15 @@ Edit konfigurasi di [`src/content/story.ts`](../src/content/story.ts). Tidak ada
 
 ## Field umum scene
 
-| Field | Wajib | Aturan |
-| --- | --- | --- |
-| `id` | Ya | String non-kosong dan unik di seluruh daftar. Pakai ID stabil, pendek, huruf kecil, dan tanda hubung. |
-| `type` | Ya | `invitation`, `narrative`, `confession`, atau `closing`. |
-| `label` | Ya | Eyebrow pendek yang terlihat di atas heading. |
-| `heading` | Ya | Headline scene. |
-| `emphasis` | Tidak | Baris headline kedua yang ditampilkan sebagai italic/aksen. |
-| `continueLabel` | Tidak | Override CTA hero untuk invitation. |
-| `revealLabel` | Tidak | Override tombol Final Click untuk confession. |
+| Field           | Wajib | Aturan                                                                                                |
+| --------------- | ----- | ----------------------------------------------------------------------------------------------------- |
+| `id`            | Ya    | String non-kosong dan unik di seluruh daftar. Pakai ID stabil, pendek, huruf kecil, dan tanda hubung. |
+| `type`          | Ya    | `invitation`, `narrative`, `confession`, atau `closing`.                                              |
+| `label`         | Ya    | Eyebrow pendek yang terlihat di atas heading.                                                         |
+| `heading`       | Ya    | Headline scene.                                                                                       |
+| `emphasis`      | Tidak | Baris headline kedua yang ditampilkan sebagai italic/aksen.                                           |
+| `continueLabel` | Tidak | Override CTA hero untuk invitation.                                                                   |
+| `revealLabel`   | Tidak | Override tombol Final Click untuk confession.                                                         |
 
 ## Jenis scene
 

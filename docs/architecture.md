@@ -59,12 +59,12 @@ flowchart LR
 
 Setiap scene memiliki `id`, `type`, `label`, `heading`, dan optional `emphasis`.
 
-| `type` | Konten khusus | Peran |
-| --- | --- | --- |
-| `invitation` | `body` | Hero pembuka dan aksi Begin. Harus menjadi scene pertama. |
-| `narrative` | `layout`, `fragments[]` | Chapter story biasa; satu fragmen adalah unit copy, bukan gerbang klik pada alur sekarang. |
+| `type`       | Konten khusus                              | Peran                                                                                            |
+| ------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `invitation` | `body`                                     | Hero pembuka dan aksi Begin. Harus menjadi scene pertama.                                        |
+| `narrative`  | `layout`, `fragments[]`                    | Chapter story biasa; satu fragmen adalah unit copy, bukan gerbang klik pada alur sekarang.       |
 | `confession` | `introduction`, `confession`, `supporting` | Gerbang Final Click yang mengontrol apakah copy utama dirender dan apakah closing dapat diakses. |
-| `closing` | `body` | Penutup tanpa permintaan balasan; harus menjadi scene terakhir. |
+| `closing`    | `body`                                     | Penutup tanpa permintaan balasan; harus menjadi scene terakhir.                                  |
 
 `resolveScenes` mem-parsing kandidat dengan Zod, melewati scene opsional yang invalid/ID duplikat, kemudian memastikan tepat satu invitation di awal, satu confession sebelum akhir, dan satu closing di akhir. Jika peran utama tidak valid, ia menggunakan fallback aman tiga scene. Ini menangani data runtime; kesalahan sintaks TypeScript tetap harus diperbaiki agar proyek dapat dikompilasi.
 
