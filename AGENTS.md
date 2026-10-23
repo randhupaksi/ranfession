@@ -4,6 +4,8 @@
 
 Sebelum mengubah produk, baca [gambaran produk](docs/product-overview.md), [arsitektur](docs/architecture.md), dan dokumentasi spesifik yang berhubungan dengan perubahan. PRD sumber adalah `PRD_Confession_Codex_Versi_Baru.docx`; ringkasannya dan status terhadap implementasi ada di `docs/product-overview.md` serta `docs/requirements-traceability.md`.
 
+Gunakan [peta dokumentasi](docs/INDEX.md) untuk memilih konteks yang relevan secara cepat. Jangan memuat dokumen yang tidak terkait tanpa alasan; batas produk dan source tetap lebih penting daripada ringkasan dokumen.
+
 PRD adalah konteks kebutuhan produk, bukan izin untuk membuat layanan lain atau mengabaikan permintaan terbaru pengguna. Untuk alur antarmuka, keputusan terbaru yang berlaku adalah: hero pembuka satu layar, lalu cerita scroll. Tidak semua scene memerlukan tombol Reveal/Continue. **Final Click** tetap wajib menjadi satu-satunya gerbang yang menampilkan isi confession.
 
 ## Batas produk yang harus dijaga

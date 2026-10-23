@@ -45,6 +45,7 @@ PRD awal mengusulkan interaksi klik pada setiap fragmen. Keputusan produk terbar
 
 ## Peta dokumentasi
 
+- [Indeks dokumentasi](docs/INDEX.md) — titik awal untuk memilih konteks produk/teknis yang relevan.
 - [AGENTS.md](AGENTS.md) — aturan kerja agent untuk repo ini.
 - [CLAUDE.md](CLAUDE.md) — instruksi Claude Code; menunjuk ke aturan repo yang sama.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — alur perubahan dan review.
